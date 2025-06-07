@@ -5,7 +5,6 @@ import com.study.toy.dto.CommonResponse;
 import com.study.toy.dto.ProfileDetailResponseDto;
 import com.study.toy.dto.ProfileResponseDto;
 import com.study.toy.service.ProfileService;
-import com.study.toy.service.ResponseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProfileApiController {
     private final ProfileService profileService;
-    private final ResponseService responseService;
 
     //데이터만 리턴하는 메서드
 //    @GetMapping("/api/profiles")
@@ -39,14 +37,15 @@ public class ProfileApiController {
 
 
     @GetMapping("/api/profiles")
-    public ResponseEntity<CommonResponse<?>> findAllProriles(){
-        return ResponseEntity.ok(responseService.success("전체 프로필 조회 성공", profileService.getAllProfiles()));
+    public ResponseEntity<?> findAllProriles(){
+        List<ProfileResponseDto> profiles = profileService.getAllProfiles();
+        return CommonResponse.setResponse(new CommonResponse<>(profiles));
     }
 
     @GetMapping("/api/profiles/{id}")
-    public ResponseEntity<CommonResponse<?>> findProfile(@PathVariable long id){
-        return ResponseEntity.ok
-                (responseService.success("프로필 조회 성공", ProfileDetailResponseDto.from(profileService.getProfiles(id)))
-        );
+    public ResponseEntity<?> findProfile(@PathVariable long id){
+
+        ProfileResponseDto profiles = ProfileResponseDto.from(profileService.getProfiles(id));
+        return CommonResponse.setResponse(new CommonResponse<>(profiles));
     }
 }
