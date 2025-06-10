@@ -1,7 +1,6 @@
 package com.study.toy.dto;
 
-import com.study.toy.global.ErrorCode;
-import lombok.AllArgsConstructor;
+import com.study.toy.global.Exception.ErrorCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

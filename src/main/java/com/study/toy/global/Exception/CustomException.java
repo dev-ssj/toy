@@ -1,4 +1,4 @@
-package com.study.toy.global;
+package com.study.toy.global.Exception;
 
 public class CustomException extends RuntimeException {
 
