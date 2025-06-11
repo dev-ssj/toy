@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Getter
 @Entity
@@ -35,6 +36,10 @@ public class User extends BaseEntity{
         this.email = email;
         this.password =password;
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public boolean checkPassword(String Password) {
+        return new BCryptPasswordEncoder().matches(Password, this.password);
     }
 
 }
