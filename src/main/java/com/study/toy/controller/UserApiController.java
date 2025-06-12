@@ -1,6 +1,7 @@
 package com.study.toy.controller;
 
 import com.study.toy.domain.User;
+import com.study.toy.dto.CommonResponse;
 import com.study.toy.dto.LoginDto;
 import com.study.toy.dto.RegisterDto;
 import com.study.toy.dto.TokenResponseDto;
@@ -31,6 +32,7 @@ public class UserApiController {
         return ResponseEntity.ok(response);
     }
 
+    //강사님이 주신 api요청대로
     @PostMapping("/api/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
         try {
@@ -41,6 +43,13 @@ public class UserApiController {
                     .status(HttpStatus.UNAUTHORIZED)
                     .body(Map.of("errors", List.of(Map.of("msg", "Invalid Credentials"))));
         }
+    }
+
+    //공통 api응답
+    @PostMapping("/login")
+    public ResponseEntity<?> login2(@RequestBody LoginDto loginDto) {
+        TokenResponseDto tokenResponse = userService.login(loginDto);
+        return CommonResponse.setResponse(new CommonResponse<>(tokenResponse));
     }
 }
 

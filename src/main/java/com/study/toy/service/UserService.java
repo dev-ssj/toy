@@ -48,9 +48,7 @@ public class UserService {
                 () -> new InvalidUserEmailException()
         );
 
-        if(!user.checkPassword(loginDto.getPassword())) {
-            throw new InvalidUserPasswordException();
-        }
+        user.checkPassword(loginDto.getPassword(), passwordEncoder);
         return toTokenResponseDto(user);
     }
 

@@ -1,5 +1,6 @@
 package com.study.toy.domain;
 
+import com.study.toy.global.Exception.InvalidUserPasswordException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -38,8 +39,10 @@ public class User extends BaseEntity{
         this.profileImageUrl = profileImageUrl;
     }
 
-    public boolean checkPassword(String Password) {
-        return new BCryptPasswordEncoder().matches(Password, this.password);
+    public void checkPassword(String Password, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        if (!bCryptPasswordEncoder.matches(Password, this.password)) {
+            throw new InvalidUserPasswordException();
+        }
     }
 
 }
