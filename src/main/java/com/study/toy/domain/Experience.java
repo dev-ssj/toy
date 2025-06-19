@@ -48,4 +48,8 @@ public class Experience extends BaseEntity {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 }

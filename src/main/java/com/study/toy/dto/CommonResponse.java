@@ -22,12 +22,16 @@ public class CommonResponse<T> {
         this.response = response;
     }
 
-    public CommonResponse(final ErrorCode code) {
-        this.message = code.getMessage();
+    public CommonResponse(final ErrorCode errorCode) {
+        this.code = errorCode.getCode();
+        this.message = errorCode.getMessage();
         this.response = null;
     }
 
-    public CommonResponse(final ErrorCode code, final String message) {
+
+
+    public CommonResponse(final ErrorCode errorCode, final String message) {
+        this.code = errorCode.getCode();
         this.message = message;
         this.response = null;
     }

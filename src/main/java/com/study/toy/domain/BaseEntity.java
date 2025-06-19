@@ -25,5 +25,5 @@ public abstract class BaseEntity {
 
     @Column(name = "is_deleted")
     @ColumnDefault("0")
-    private Boolean IsDeleted;
+    private Boolean isDeleted = false;
 }

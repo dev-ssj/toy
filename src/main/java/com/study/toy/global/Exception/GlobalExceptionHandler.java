@@ -11,19 +11,19 @@ public class GlobalExceptionHandler {
 
     //커스텀 예외 처리
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<?> handleCustomException(CustomException ex) {
-        return CommonResponse.setResponse(CommonResponse.of(ex.getErrorCode()));
+    public ResponseEntity<CommonResponse<?>> handleCustomException(CustomException ex) {
+        return ResponseEntity
+                .status(ex.getErrorCode().getCode())
+                .body(CommonResponse.of(ex.getErrorCode()));
     }
 
-    // 잘못된 파라미터나 값이 들어왔을 때 예외 처리
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<?> handleIllegalArgument(IllegalArgumentException ex) {
-        return CommonResponse.setResponse(CommonResponse.of(ErrorCode.BAD_REQUEST, ex.getMessage()));
-    }
 
     //모든 예상치 못한 에러 처리
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleUnhandled(Exception ex){
-        return CommonResponse.setResponse(CommonResponse.of(ErrorCode.INTERNAL_SERVER_ERROR,"알 수 없는 에러가 발생했습니다."));
+    public ResponseEntity<CommonResponse<?>> handleUnhandled(Exception ex) {
+        return ResponseEntity
+                .status(ErrorCode.INTERNAL_SERVER_ERROR.getCode())
+                .body(CommonResponse.of(ErrorCode.INTERNAL_SERVER_ERROR, ex.getMessage()));
     }
+
 }

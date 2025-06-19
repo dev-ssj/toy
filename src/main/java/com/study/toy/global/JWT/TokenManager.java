@@ -8,9 +8,11 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.study.toy.dto.TokenDto;
 import com.study.toy.dto.TokenResponseDto;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import io.jsonwebtoken.Claims;
 
 import java.util.Date;
 
@@ -41,22 +43,15 @@ public class TokenManager {
     }
 
     public void validateToken(String token) {
-//        if (ObjectUtils.isEmpty(token)) {
-//            throw new UsernameFromTokenException("JWT Empty. Please check header.");
-//        }
         JWTVerifier verifier = JWT.require(Algorithm.HMAC512(jwtSecret))
                 .withIssuer(jwtIssuer)
                 .build();
-
         DecodedJWT jwt = verifier.verify(token);
-
-
-
         TokenContext context = TokenContextHolder.getContext();
 
         Claim claim = jwt.getClaim("user_id");
         context.setUserId(claim.asLong());
-
         TokenContextHolder.setContext(context);
     }
+
 }

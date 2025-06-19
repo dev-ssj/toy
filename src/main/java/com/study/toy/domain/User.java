@@ -1,6 +1,7 @@
 package com.study.toy.domain;
 
-import com.study.toy.global.Exception.InvalidUserPasswordException;
+import com.study.toy.global.Exception.CustomException;
+import com.study.toy.global.Exception.ErrorCode;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -41,7 +42,7 @@ public class User extends BaseEntity{
 
     public void checkPassword(String Password, BCryptPasswordEncoder bCryptPasswordEncoder) {
         if (!bCryptPasswordEncoder.matches(Password, this.password)) {
-            throw new InvalidUserPasswordException();
+            throw new CustomException(ErrorCode.INVALID_PASSWORD);
         }
     }
 
