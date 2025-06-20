@@ -2,12 +2,16 @@ package com.study.toy.dto;
 
 import com.study.toy.domain.Profile;
 import com.study.toy.domain.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
 public class CreateProfileRequestDto {
+    private Long id;
     private String location;
     private String bio;
     private String website;
@@ -32,5 +36,15 @@ public class CreateProfileRequestDto {
                 .webSite(website)
                 .gitName(gitName)
                 .build();
+    }
+
+    @Builder
+    public CreateProfileRequestDto(Long id, String location, String bio, String website, String gitName, String skillSet){
+        this.id = id;
+        this.location = location;
+        this.bio = bio;
+        this.website = website;
+        this.gitName = gitName;
+        this.skillSet = skillSet;
     }
 }

@@ -2,6 +2,7 @@ package com.study.toy.dto;
 
 import com.study.toy.domain.Education;
 import com.study.toy.domain.Profile;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -25,4 +26,14 @@ public class EducationRequestDto {
                 .profile(profile)
                 .build();
     }
+
+    @Builder
+    public EducationRequestDto(String school, String fieldOfStudy, String degree, LocalDate startDate, LocalDate endDate){
+        this.school = school;
+        this.fieldOfStudy = fieldOfStudy;
+        this.degree = degree;
+        this.startDate = startDate;
+        this.endDate =endDate;
+    }
+
 }

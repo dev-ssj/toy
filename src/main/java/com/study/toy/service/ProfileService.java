@@ -121,8 +121,6 @@ public class ProfileService {
         Experience experience = requestDto.toEntity(profile);
         experienceRepository.save(experience);// 연관관계 설정
 
-        // 3. 저장
-        experienceRepository.save(experience);
     }
 
     /*
